@@ -6,6 +6,7 @@ namespace Wcs\Upload;
 use Wcs;
 use Wcs\Http\PutPolicy;
 use Wcs\Config;
+use Wcs\Utils;
 
 $UPLOAD = '';
 
@@ -64,7 +65,7 @@ class Uploader
             CURLOPT_NOPROGRESS => true
         );
 
-        $resp = \Wcs\http_post($url, null, $fields, $opt);
+        $resp = Utils::http_post($url, null, $fields, $opt);
 
         return $resp;
     }

@@ -3,6 +3,7 @@ namespace  Wcs\SrcManage;
 
 use Wcs;
 use Wcs\Config;
+use Wcs\Utils;
 
 class FileManager
 {
@@ -24,7 +25,7 @@ class FileManager
         $token = $this->auth->get_token($url, $body=$body);
         $headers = array("Authorization:$token");
         return $headers;
-    }   
+    }
 
     public function move($bucketSrc, $keySrc, $bucketDst, $keyDst) {
         $paramSrc = $bucketSrc . ":" . $keySrc;
@@ -33,7 +34,7 @@ class FileManager
         $paramDst = Wcs\url_safe_base64_encode($paramDst);
 
         $url = Config::WCS_MGR_URL . "/move/" . $paramSrc . "/" . $paramDst;
-         
+
         $headers = $this->_genernate_header($url);
 
         $resp = $this->_post($url, $headers);
@@ -74,7 +75,7 @@ class FileManager
     public function delete($bucketName, $fileKey)
     {
         $entry = $bucketName . ':' . $fileKey;
-        $encodedEntry = \Wcs\url_safe_base64_encode($entry);
+        $encodedEntry = Utils::url_safe_base64_encode($entry);
 
         $url = Config::WCS_MGR_URL . '/delete/' . $encodedEntry;
         $headers = $this->_genernate_header($url);
@@ -91,7 +92,7 @@ class FileManager
     public function stat($bucketName, $fileKey)
     {
         $entry = $bucketName . ':' . $fileKey;
-        $encodedEntry = \Wcs\url_safe_base64_encode($entry);
+        $encodedEntry = Utils::url_safe_base64_encode($entry);
 
 
         $url = Config::WCS_MGR_URL . '/stat/' . $encodedEntry;
@@ -110,10 +111,10 @@ class FileManager
      */
     public function setDeadline($bucketName, $fileKey,$deadline)
     {
-        $encodebucket = \Wcs\url_safe_base64_encode($bucketName);
-        $encodekey = \Wcs\url_safe_base64_encode($fileKey);
+        $encodebucket = Utils::url_safe_base64_encode($bucketName);
+        $encodekey = Utils::url_safe_base64_encode($fileKey);
         $body = 'bucket='.$encodebucket.'&'.'key='.$encodekey.'&'.'deadline='.$deadline;
-        
+
         $url = Config::WCS_MGR_URL.'/setdeadline';
         $headers = $this->_genernate_header($url, $body);
         return $this->_post($url, $headers, $body);
@@ -125,7 +126,7 @@ class FileManager
         $path .= "?bucket=$bucket";
         $path .= "&limit=$limit";
         if($prefix !== null) {
-            $prefix = \Wcs\url_safe_base64_encode($prefix);
+            $prefix = Utils::url_safe_base64_encode($prefix);
             $path.= "&prefix=$prefix";
         }
         if($mode !== null) {
@@ -175,7 +176,7 @@ class FileManager
         $url = $host . '/' . $fileName;
         $params =  '?op=avinfo';
         $url .= $params;
-        $resp = Wcs\http_get($url, null);
+        $resp =Utils::http_get($url, null);
 
         return $resp;
     }
@@ -188,19 +189,19 @@ class FileManager
         $url = $host . '/' . $fileName;
         $params =  '?op=avinfo2';
         $url .= $params;
-        $resp = Wcs\http_get($url, null);
+        $resp =Utils::http_get($url, null);
 
         return $resp;
     }
 
     private function  _get($url, $headers=null) {
-        $resp = \Wcs\http_get($url, $headers);
+        $resp = Utils::http_get($url, $headers);
 
         return $resp;
     }
 
     private function _post($url, $headers=null, $body=null) {
-        $resp = \Wcs\http_post($url, $headers, $body);
+        $resp = Utils::http_post($url, $headers, $body);
 
         return $resp;
         //return $resp;

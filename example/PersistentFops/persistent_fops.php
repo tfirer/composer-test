@@ -1,8 +1,9 @@
 <?php
-require '../../vendor/autoload.php';
-use \Wcs\PersistentFops\Fops;
-use \Wcs\Config;
-use \Wcs\MgrAuth;
+
+require_once __DIR__ . '/../common.php';
+use Wcs\PersistentFops\Fops;
+use Wcs\Config;
+use Wcs\MgrAuth;
 
 $bucket = 'lumj-test';
 $key = 'video_sync.mp4';

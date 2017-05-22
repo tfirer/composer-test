@@ -1,6 +1,8 @@
 <?php
 namespace Wcs\ImageProcess;
 
+use Wcs\Utils;
+
 
 class ImageView {
 
@@ -70,7 +72,7 @@ class ImageView {
             $localFile = $fileName;
         }
 
-        $baseUrl  =  \Wcs\build_public_url($bucketName, $fileName);
+        $baseUrl  =  Utils::build_public_url($bucketName, $fileName);
         $params = $this->buildUrlParams();
 
         $url = $baseUrl . $params;
@@ -80,4 +82,4 @@ class ImageView {
         //返回响应信息
         return $resp->message;
     }
-} 
+}

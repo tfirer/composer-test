@@ -2,13 +2,14 @@
 
 namespace Wcs\ImageProcess;
 
+use Wcs\Utils;
 
 class Image {
 
     public static function GET($url, $localFile) {
 
         //发送请求
-        $resp = \Wcs\http_get($url, null);
+        $resp = Utils::http_get($url, null);
 
         //返回成功状态码，保存图片
         if((int)($resp->code / 100) == 2) {

@@ -2,7 +2,7 @@
 namespace  Wcs\ImageProcess;
 
 use Wcs;
-//require_once("utils.php");
+use Wcs\Utils;
 
 class ImageWatermark {
     /**
@@ -106,15 +106,15 @@ class ImageWatermark {
 
         if ($mode === 1) {
             if (!empty($this->image)) {
-                $params .= '&image=' . \Wcs\url_safe_base64_encode($this->image);
+                $params .= '&image=' . Utils::url_safe_base64_encode($this->image);
             }
         } else if ($mode === 2) {
             if (!empty($this->text)) {
-                $params .= '&text=' . \Wcs\url_safe_base64_encode($this->text);
+                $params .= '&text=' . Utils::url_safe_base64_encode($this->text);
             }
 
             if (!empty($this->font)) {
-                $params .= '&font=' . \Wcs\url_safe_base64_encode($this->font);
+                $params .= '&font=' . Utils::url_safe_base64_encode($this->font);
             }
 
             if (!empty($this->fontsize)) {
@@ -122,7 +122,7 @@ class ImageWatermark {
             }
 
             if (!empty($this->fill)) {
-                $params .= '&fill=' . \Wcs\url_safe_base64_encode($this->fill);
+                $params .= '&fill=' . Utils::url_safe_base64_encode($this->fill);
             }
         }
 
@@ -141,7 +141,7 @@ class ImageWatermark {
             $localFile = $fileName;
         }
 
-        $baseUrl =  \Wcs\build_public_url($bucketName, $fileName);
+        $baseUrl =  Utils::build_public_url($bucketName, $fileName);
         $params = $this->buildUrlParams();
         $url = $baseUrl . $params;
         //echo $url."\n";
@@ -150,4 +150,4 @@ class ImageWatermark {
         //返回响应信息
         return $resp->message;
     }
-} 
+}

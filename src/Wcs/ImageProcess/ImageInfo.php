@@ -1,7 +1,7 @@
 <?php
 namespace Wcs\ImageProcess;
 
-use Wcs;
+use Wcs\Utils;
 
 
 class ImageInfo
@@ -12,10 +12,10 @@ class ImageInfo
      * @param   $key
      * */
     public function imgInfo($bucketName, $fileName) {
-        $url = Wcs\build_public_url($bucketName, $fileName);
+        $url = Utils::build_public_url($bucketName, $fileName);
         $params = '?op=imageInfo';
         $url .= $params;
-        $resp = Wcs\http_get($url, null);
+        $resp =Utils::http_get($url, null);
 
         return $resp;
     }
@@ -25,13 +25,13 @@ class ImageInfo
      * @param   $key
      * */
     public function imgEXIF($bucketName, $fileName) {
-        $url = Wcs\build_public_url($bucketName, $fileName);
+        $url = Utils::build_public_url($bucketName, $fileName);
         $params = '?op=exif';
         $url .= $params;
-        $resp = Wcs\http_get($url, null);
+        $resp = Utils::http_get($url, null);
 
         return $resp;
     }
 
 
-} 
+}

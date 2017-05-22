@@ -1,8 +1,8 @@
 <?php
-require '../../vendor/autoload.php';
-use \Wcs\SrcManage\FileManager;
-use \Wcs\MgrAuth;
-use \Wcs\Config;
+require_once __DIR__ . '/../common.php';
+use Wcs\SrcManage\FileManager;
+use Wcs\MgrAuth;
+use Wcs\Config;
 
 function print_help() {
     echo "Usage: php file_list.php [-h | --help] -b <bucketName> [-l <limit>] [-p <prefix>] [-m <mode>] [-M <marker>]\n";

@@ -16,12 +16,12 @@ final class Mac
     public function get_token($data)
     {
         $sign = hash_hmac('sha1', $data, $this->SecretKey, false);
-        return $this->AccessKey . ':' . url_safe_base64_encode($sign);
+        return $this->AccessKey . ':' . Utils::url_safe_base64_encode($sign);
     }
 
     public function get_token_with_data($data)
     {
-        $data = url_safe_base64_encode($data);
+        $data = Utils::url_safe_base64_encode($data);
         return $this->get_token($data) . ':' . $data;
     }
 

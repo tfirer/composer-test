@@ -4,6 +4,7 @@ namespace Wcs\Upload;
 use Wcs;
 use Wcs\Http\PutPolicy;
 use Wcs\Config;
+use Wcs\Utils;
 use GuzzleHttp\Client;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
@@ -441,7 +442,7 @@ class ResumeUploader
         );
         $fields = $nextChunk;
 
-        $resp = \Wcs\http_post($url, $httpHeaders, $fields);
+        $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
 
@@ -467,7 +468,7 @@ class ResumeUploader
 
         $fields = $nextChunk;
 
-        $resp = \Wcs\http_post($url, $httpHeaders, $fields);
+        $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
 
@@ -494,7 +495,7 @@ class ResumeUploader
             'Authorization: '.$token,
             'Content-Type: text/plain;charset=UTF-8',
             'uploadBatch: '.$this->uuid,
-            'key: '.Wcs\url_safe_base64_encode(basename($this->localFile)),
+            'key: '.Utils::url_safe_base64_encode(basename($this->localFile)),
             'mimeType '.$this->mimeType
         );
 
@@ -503,7 +504,7 @@ class ResumeUploader
             array_push($this->hashTable['info']['ctxList'], $this->hashTable[$i]['latestCtx']);
         }
         $fields = implode($this->hashTable['info']['ctxList'], ",");
-        $resp = \Wcs\http_post($url, $httpHeaders, $fields);
+        $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
 

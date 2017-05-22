@@ -2,6 +2,8 @@
 
 namespace  Wcs\ImageProcess;
 
+use Wcs\Utils;
+
 class ImageMogr
 {
     /**
@@ -89,7 +91,7 @@ class ImageMogr
             $localFile = $fileName;
         }
 
-        $baseUrl  =  \Wcs\build_public_url($bucketName, $fileName);
+        $baseUrl  =  Utils::build_public_url($bucketName, $fileName);
         $params = $this->buildUrlParams();
         $url = $baseUrl . $params;
 

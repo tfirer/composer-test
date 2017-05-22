@@ -1,5 +1,5 @@
 <?php
-require '../../vendor/autoload.php';
+require_once __DIR__ . '/../common.php';
 use Wcs\Upload\Uploader;
 use Wcs\Http\PutPolicy;
 use Wcs\Config;
@@ -41,11 +41,11 @@ print("\n");
 $pp = new PutPolicy();
 $pp->overwrite = Config::WCS_OVERWRITE;
 if ($fileKey == null || $fileKey === '') {
-    $pp->scope = $bucketName; 
-} else {                              
+    $pp->scope = $bucketName;
+} else {
     $pp->scope = $bucketName . ':' . $fileKey;
-}  
-$token = $pp->get_token(); 
+}
+$token = $pp->get_token();
 
 $client = new Uploader($token, $userParam, $userVars, $mimeType);
 $res = $client->upload_return($localFile);

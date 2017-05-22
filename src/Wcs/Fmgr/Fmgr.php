@@ -2,6 +2,7 @@
 namespace Wcs\Fmgr;
 
 use Wcs\Config;
+use Wcs\Utils;
 
 class Fmgr {
 
@@ -61,7 +62,7 @@ class Fmgr {
     private function _genernate_header($url, $body=null)
     {
         $token = $this->auth->get_token($url, $body=$body);
-        $headers = array("Authorization:$token"); 
+        $headers = array("Authorization:$token");
         return $headers;
     }
     public function fetch($fops) {
@@ -69,7 +70,7 @@ class Fmgr {
         $url = Config::WCS_MGR_URL . "/fmgr/fetch";
         $signingStr = "/fmgr/fetch" . "\n";
         $content = $this->_addContent($fops);
-        
+
         $headers = $this->_genernate_header($url, $content);
 
         $resp = $this->_post($url, $headers, $content);
@@ -171,7 +172,7 @@ class Fmgr {
      */
     public function status($persistentId) {
         $url = Config::WCS_MGR_URL . "/fmgr/status?persistentId=" . $persistentId;
-        $resp = \Wcs\http_get($url, null);
+        $resp = Utils::http_get($url, null);
 
         return $resp;
     }
@@ -186,7 +187,7 @@ class Fmgr {
         $content = $this->fops;
 
         if(!empty($this->notifyURL)) {
-            $content .= "&notifyURL=" . \Wcs\url_safe_base64_encode($this->notifyURL);
+            $content .= "&notifyURL=" . Utils::url_safe_base64_encode($this->notifyURL);
         }
         $content .= "&force=" . $this->force;
         $content .= "&separate=" . $this->separate;
@@ -202,7 +203,7 @@ class Fmgr {
      */
     private function _post($url, $headers, $body) {
 
-        $resp = \Wcs\http_post($url, $headers, $body);
+        $resp = Utils::http_post($url, $headers, $body);
 
         return $resp;
     }

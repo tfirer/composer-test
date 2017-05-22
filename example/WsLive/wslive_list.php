@@ -1,5 +1,5 @@
 <?php
-require '../../vendor/autoload.php';
+require_once __DIR__ . '/../common.php';
 use Wcs\Wslive\WsLive;
 use Wcs\MgrAuth;
 use Wcs\Config;

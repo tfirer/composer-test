@@ -3,6 +3,7 @@ namespace Wcs\Wslive;
 
 use Wcs;
 use Wcs\Config;
+use Wcs\Utils;
 
 class WsLive
 {
@@ -27,18 +28,18 @@ class WsLive
             $query.= $tmp;
         }
         if($limit)
-        { 
+        {
             $tmp = '&limit='.$limit;
             $query.=$tmp;
         }
         $url = $url.'?'.$query;
         $headers = $this->_generate_headers($url);
         $resp = $this->_get($url, $headers);
-        return $resp; 
+        return $resp;
     }
     private function _get($url, $headers=null,$body=null)
     {
-        $resp = \Wcs\http_get($url, $headers, $body);
-        return $resp; 
+        $resp = Utils::http_get($url, $headers, $body);
+        return $resp;
     }
 }

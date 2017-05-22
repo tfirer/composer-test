@@ -1,7 +1,7 @@
 <?php
 /**************************************/
-require '../../vendor/autoload.php';
-use \Wcs\ImageProcess\ImageInfo;
+require_once __DIR__ . '/../common.php';
+use Wcs\ImageProcess\ImageInfo;
 /**************************************/
 
 function print_help() {

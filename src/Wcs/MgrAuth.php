@@ -2,6 +2,8 @@
 
 namespace Wcs;
 
+use Wcs\Utils;
+
 class MgrAuth
 {
     public $AccessKey;
@@ -12,7 +14,7 @@ class MgrAuth
         $this->AccessKey = $accessKey;
         $this->SecretKey = $secretKey;
     }
-    
+
     public function get_token($url, $body=null)
     {
         $path = parse_url($url, PHP_URL_PATH);
@@ -26,7 +28,7 @@ class MgrAuth
             }
         }
         else {
-            if ($body) { 
+            if ($body) {
                 $arr = array($path,"\n",$body);
             }
             else {
@@ -35,7 +37,7 @@ class MgrAuth
         }
         $sign = join("",$arr);
         $encodesign = hash_hmac('sha1', $sign, $this->SecretKey, false);
-        return $this->AccessKey . ':' . url_safe_base64_encode($encodesign);        
+        return $this->AccessKey . ':' . Utils::url_safe_base64_encode($encodesign);
     }
 }
 

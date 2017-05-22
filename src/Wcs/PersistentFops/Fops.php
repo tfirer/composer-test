@@ -3,6 +3,7 @@
 namespace  Wcs\PersistentFops;
 use Wcs;
 use Wcs\Config;
+use Wcs\Utils;
 
 class Fops {
 
@@ -12,7 +13,7 @@ class Fops {
      */
     private $bucket;
     private $auth;
-    
+
 
     public function __construct($auth, $bucket)
     {
@@ -33,12 +34,12 @@ class Fops {
      */
     public function exec($fops, $key, $notifyURL=null, $force=0, $separate=0) {
         $url = Config::WCS_MGR_URL . '/fops';
-        $encodebucket = \Wcs\url_safe_base64_encode(($this->bucket));
+        $encodebucket = Utils::url_safe_base64_encode(($this->bucket));
         $body = 'bucket='.$encodebucket;
-        $body .= '&key=' . \Wcs\url_safe_base64_encode($key);
-        $body .= '&fops=' .\Wcs\url_safe_base64_encode($fops);
+        $body .= '&key=' . Utils::url_safe_base64_encode($key);
+        $body .= '&fops=' .Utils::url_safe_base64_encode($fops);
         if(!empty($notifyURL)) {
-            $body .= '&notifyURL=' .\Wcs\url_safe_base64_encode($notifyURL);
+            $body .= '&notifyURL=' .Utils::url_safe_base64_encode($notifyURL);
         }
         $body .= '&force=' . $force;
         $body .= '&separate=' . $separate;
@@ -55,7 +56,7 @@ class Fops {
      */
     public static function status($persistentId) {
         $url = Config::WCS_MGR_URL . '/status/get/prefop?persistentId=' . $persistentId;
-        $resp = \Wcs\http_get($url, null);
+        $resp = Utils::http_get($url, null);
 
         return $resp;
     }
@@ -68,7 +69,7 @@ class Fops {
      * @return mixed
      */
     private function _post($url, $headers, $content) {
-        $resp = \Wcs\http_post($url, $headers, $content);
+        $resp = Utils::http_post($url, $headers, $content);
 
         return $resp;
     }

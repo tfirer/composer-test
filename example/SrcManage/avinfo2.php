@@ -1,8 +1,8 @@
 <?php
-require '../../vendor/autoload.php';
-use \Wcs\SrcManage\FileManager;
-use \Wcs\MgrAuth;
-use \Wcs\Config;
+require_once __DIR__ . '/../common.php';
+use Wcs\SrcManage\FileManager;
+use Wcs\MgrAuth;
+use Wcs\Config;
 
 function print_help() {
     echo "Usage: php avinfo2.php [-h | --help] -H <host> -k <key>\n";

@@ -1,8 +1,8 @@
 <?php
-require '../../vendor/autoload.php';
-use \Wcs\SrcManage\FileManager;
-use \Wcs\Config;
-use \Wcs\MgrAuth;
+require_once __DIR__ . '/../common.php';
+use Wcs\SrcManage\FileManager;
+use Wcs\Config;
+use Wcs\MgrAuth;
 
 
 function print_help() {
@@ -34,7 +34,7 @@ print("fileKeys: \t$fileKeys\n");
 print("\n");
 
 $ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY; 
+$sk = Config::WCS_SECRET_KEY;
 
 $auth = new MgrAuth($ak, $sk);
 

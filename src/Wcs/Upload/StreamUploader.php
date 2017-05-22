@@ -6,6 +6,7 @@ namespace Wcs\Upload;
 use Wcs;
 use Wcs\Http\PutPolicy;
 use Wcs\Config;
+use Wcs\Utils;
 use Wcs\Http\Response;
 
 
@@ -35,8 +36,8 @@ class StreamUploader
     }
 
     function _upload($Stream) {
-       
-        //$streambody = \Wcs\http_get($Stream, $headers=null);
+
+        //$streambody = Utils::http_get($Stream, $headers=null);
         //$content = $streambody->respBody;
         $content = stream_get_contents(fopen($Stream, "rb"));
         if(!isset($content)||strlen($content)==0) {
@@ -47,10 +48,10 @@ class StreamUploader
             die("ERROR: 虚拟内存目录不存在！");
         }
         $filename = Config::WCS_RAM_URL."steam";
-        
+
         $fp = fopen($filename, "w+b");
         fwrite($fp, $content);
-        rewind($fp);        
+        rewind($fp);
         $url = Config::WCS_PUT_URL . '/file/upload';
 
         $mimeType = null;
@@ -61,7 +62,7 @@ class StreamUploader
         $opt = array(
             CURLOPT_NOPROGRESS => true
         );
-        $resp = \Wcs\http_post($url, null, $fields, $opt);
+        $resp = Utils::http_post($url, null, $fields, $opt);
         fclose($fp);
         return $resp;
     }

@@ -1,6 +1,6 @@
 <?php
-require '../../vendor/autoload.php';
-use \Wcs\Upload\Uploader;
+require_once __DIR__ . '/../common.php';
+use Wcs\Upload\Uploader;
 use Wcs\Http\PutPolicy;
 use Wcs\Config;
 
@@ -45,7 +45,7 @@ $pp->overwrite = Config::WCS_OVERWRITE;
 if ($fileKey == null || $fileKey === '') {
     $pp->scope = $bucketName;
 } else {
-    $pp->scope = $bucketName . ':' . $fileKey; 
+    $pp->scope = $bucketName . ':' . $fileKey;
 }
 $pp->callbackUrl = $callbackUrl;
 $pp->callbackBody = $callbackBody;
