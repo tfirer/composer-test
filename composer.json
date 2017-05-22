@@ -13,7 +13,6 @@
         "guzzlehttp/guzzle": "^6.2"
     },
     "autoload": {
-        "psr-4": {"Wcs\\": "src"},
-        "files": ["src/Wcs/utils.php", "src/Wcs/auth.php"]
+        "psr-4": {"Wcs\\": "src/Wcs"}
     }
 }
