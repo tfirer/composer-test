@@ -24,7 +24,6 @@ class Auth
         return self::wcs_require_mac($mac)->get_token_with_data($data);
     }
 
-
     public static function get_file_stat_token($bucketName, $fileName) {
         $encodedEntry = Utils::url_safe_base64_encode($bucketName . ':' . $fileName);
         $encodedPath = '/stat/' . $encodedEntry . "\n";
@@ -43,6 +42,5 @@ class Auth
             $signingStr .= $body;
         }
         return self::wcs_require_mac(null)->get_token($signingStr);
-
     }
 }

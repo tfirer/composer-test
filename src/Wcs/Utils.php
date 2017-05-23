@@ -17,7 +17,6 @@ class Utils
         return str_replace($find, $replace, base64_encode($str));
     }
 
-
     /**
     * @param $str
     * @return string
